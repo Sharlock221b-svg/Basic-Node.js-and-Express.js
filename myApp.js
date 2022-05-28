@@ -7,6 +7,12 @@ console.log("Hello World");
 //Giving access to static assets
 app.use("/public", express.static(__dirname + "/public"));
 
+// request logger middleware
+app.use(function (req, res, next){
+    console.log(req.method + " " + req.path + " - " + req.ip);
+    next();
+})
+
 //Index get route
 app.get("/", function(req, res){
     //sending index.html
