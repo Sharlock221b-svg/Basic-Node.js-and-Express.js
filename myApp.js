@@ -30,6 +30,7 @@ app.get("/json", function (req, res) {
   });
 });
 
+// time server using middleware
 app.get(
   "/now",
   function (req, res, next) {
@@ -38,15 +39,20 @@ app.get(
   },
   function (req, res) {
     res.json({
-      "time": req.time
+      time: req.time,
     });
   }
 );
-
-app.get("/:word/echo", function(req, res) {
-    res.json({
-        "echo": req.params.word
-    });
-})
-
+// route parameter
+app.get("/:word/echo", function (req, res) {
+  res.json({
+    echo: req.params.word,
+  });
+});
+//query parameter
+app.route("/name").get((req, res) => {
+  res.json({
+    name: req.query.first + " " + req.query.last,
+  });
+});
 module.exports = app;
